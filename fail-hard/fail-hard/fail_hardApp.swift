@@ -11,7 +11,7 @@ import SwiftUI
 struct fail_hardApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CalendarView()
         }
     }
 }
