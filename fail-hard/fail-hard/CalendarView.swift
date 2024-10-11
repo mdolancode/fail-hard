@@ -22,9 +22,7 @@ struct CalendarView: View {
             return calendar.date(from: components)
         }
     }
-    
-    
-    
+
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -33,6 +31,27 @@ struct CalendarView: View {
             Text("Hello, world!")
         }
         .padding()
+    }
+    
+    // Helper to format the date for the grid (day number)
+    private func dayString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        return formatter.string(from: date)
+    }
+    
+    // Helper to format the month and year
+    private func monthAndYearString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM yyyy"
+        return formatter.string(from: date)
+    }
+    
+    // Helper to check if two dates are the same day
+    private func isSameDay(date1: Date?, date2: Date) -> Bool {
+        guard let date1 = date1 else { return false }
+        let calendar = Calendar.current
+        return calendar.isDate(date1, inSameDayAs: date2)
     }
 }
 
