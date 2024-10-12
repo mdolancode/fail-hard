@@ -60,8 +60,8 @@
 				C50FAA0C2CB9E35900857D71 /* fail_hardApp.swift */,
 				C50FAA0E2CB9E35900857D71 /* CalendarView.swift */,
 				C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */,
-				C54E17622CBB03AC00B53674 /* WorkoutModel.xcdatamodeld */,
 				C54E17652CBB042300B53674 /* CoreDataManager.swift */,
+				C54E17622CBB03AC00B53674 /* WorkoutModel.xcdatamodeld */,
 				C50FAA102CB9E35A00857D71 /* Assets.xcassets */,
 				C50FAA122CB9E35A00857D71 /* Preview Content */,
 			);

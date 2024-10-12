@@ -22,7 +22,8 @@ struct WorkoutLoggingView: View {
                 .padding()
             
             Button("Save Workout") {
-                // Logic to save the workout will go here
+                CoreDataManager.shared.saveWorkout(name: workoutName, date: selectedDate)
+                //Add logic to play sound here later!
                 print("Workout logged for \(selectedDate): \(workoutName)")
             }
             .padding()
