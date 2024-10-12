@@ -47,10 +47,7 @@ struct CalendarView: View {
             // Days in the current month in a grid layout
             LazyVGrid(columns:Array(repeating: GridItem(), count: 7), spacing: 10) {
                 ForEach(daysInMonth, id: \.self) { day in
-                    Button(action: {
-                        selectedDate = day
-                        // Navigate to log workout or other action
-                    }) {
+                    NavigationLink(destination: WorkoutLoggingView(selectedDate: day)) {
                         Text(dayString(date: day))
                             .frame(width: 40, height: 40)
                             .backgroundStyle(isSameDay(date1: selectedDate, date2: day) ? Color.blue : Color.clear)
