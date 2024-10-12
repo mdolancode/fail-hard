@@ -14,6 +14,7 @@
 		C50FAA1B2CBA022100857D71 /* WorkoutLoggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */; };
 		C54E17642CBB03AC00B53674 /* WorkoutModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C54E17622CBB03AC00B53674 /* WorkoutModel.xcdatamodeld */; };
 		C54E17662CBB042300B53674 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54E17652CBB042300B53674 /* CoreDataManager.swift */; };
+		C54E17692CBB1A1A00B53674 /* wooo.wav in Resources */ = {isa = PBXBuildFile; fileRef = C54E17682CBB1A1A00B53674 /* wooo.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggingView.swift; sourceTree = "<group>"; };
 		C54E17632CBB03AC00B53674 /* WorkoutModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutModel.xcdatamodel; sourceTree = "<group>"; };
 		C54E17652CBB042300B53674 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		C54E17682CBB1A1A00B53674 /* wooo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wooo.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */,
 				C54E17652CBB042300B53674 /* CoreDataManager.swift */,
 				C54E17622CBB03AC00B53674 /* WorkoutModel.xcdatamodeld */,
+				C54E17672CBB19A000B53674 /* Audio */,
 				C50FAA102CB9E35A00857D71 /* Assets.xcassets */,
 				C50FAA122CB9E35A00857D71 /* Preview Content */,
 			);
@@ -74,6 +77,14 @@
 				C50FAA132CB9E35A00857D71 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C54E17672CBB19A000B53674 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				C54E17682CBB1A1A00B53674 /* wooo.wav */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,6 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C54E17692CBB1A1A00B53674 /* wooo.wav in Resources */,
 				C50FAA142CB9E35A00857D71 /* Preview Assets.xcassets in Resources */,
 				C50FAA112CB9E35A00857D71 /* Assets.xcassets in Resources */,
 			);
