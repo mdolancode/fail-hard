@@ -25,7 +25,7 @@ struct WorkoutLoggingView: View {
             
             Button("Save Workout") {
                 CoreDataManager.shared.saveWorkout(name: workoutName, date: selectedDate)
-                playWoooSound()
+                playCelebrationSound()
                 print("Workout logged for \(selectedDate): \(workoutName)")
                 
                 if let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
@@ -37,9 +37,10 @@ struct WorkoutLoggingView: View {
         .navigationTitle("Log Workout")
     }
     
-    func playWoooSound() {
-        guard let soundURL = Bundle.main.url(forResource: "wooo", withExtension: "wav") else {
-            print("Sound file not found")
+    func playCelebrationSound() {
+        guard let soundURL = Bundle.main.url(forResource: "celebration", withExtension: "wav") else {
+            print("Main sound file not found, playing fallback sound")
+            playFallBackSound()
             return
         }
         
@@ -48,6 +49,22 @@ struct WorkoutLoggingView: View {
             audioPlayer?.play()
         } catch {
             print("Error playing sound: \(error.localizedDescription)")
+            playFallBackSound()
+        }
+    }
+    
+    func playFallBackSound() {
+        // Provide a fallback sound in case the main sound fails
+        guard let fallbackSoundURL = Bundle.main.url(forResource: "fallback", withExtension: "wav") else {
+            print("Fallback sound file not found")
+            return
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: fallbackSoundURL)
+            audioPlayer?.play()
+        } catch {
+            print("Error playing fallback sound: \(error.localizedDescription)")
         }
     }
     
