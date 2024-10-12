@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct WorkoutLoggingView: View {
+    let selectedDate: Date
+    @State private var workoutName: String = ""
+    
     var body: some View {
-        Text("hello")
+        VStack {
+            Text("Log Workout for \(dayString(date:selectedDate))")
+                .font(.headline)
+                .padding()
+            
+            TextField("Workout Name", text: $workoutName)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
+            Button("Save Workout") {
+                // Logic to save the workout will go here
+                print("Workout logged for \(selectedDate): \(workoutName)")
+            }
+            .padding()
+        }
+        .navigationTitle("Log Workout")
     }
     
     func dayString(date: Date) -> String {
@@ -21,6 +39,6 @@ struct WorkoutLoggingView: View {
 
 struct WorkoutLoggingView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutLoggingView()
+        WorkoutLoggingView(selectedDate: Date())
     }
 }
