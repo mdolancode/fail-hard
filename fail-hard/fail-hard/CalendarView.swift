@@ -25,10 +25,41 @@ struct CalendarView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("Fail Hard!")
+                .font(.largeTitle)
+                .padding()
+            
+            // Month and year display
+            Text(monthAndYearString(date: currentDate))
+                .font(.title2)
+                .padding()
+            
+            // Days of the week header
+            HStack {
+                ForEach(["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], id: \.self) { day in
+                    Text(day)
+                        .frame(maxWidth: .infinity)
+                }
+            }
+            
+            // Have a sound play and celebrate after every workout is complete
+            
+            // Days in the current month in a grid layout
+            LazyVGrid(columns:Array(repeating: GridItem(), count: 7), spacing: 10) {
+                ForEach(daysInMonth, id: \.self) { day in
+                    Button(action: {
+                        selectedDate = day
+                        // Navigate to log workout or other action
+                    }) {
+                        Text(dayString(date: day))
+                            .frame(width: 40, height: 40)
+                            .backgroundStyle(isSameDay(date1: selectedDate, date2: day) ? Color.blue : Color.clear)
+                            .foregroundColor(isSameDay(date1: selectedDate, date2: day) ? .white : .black)
+                            .clipShape(Circle())
+                    }
+                }
+            }
+            Spacer()
         }
         .padding()
     }
