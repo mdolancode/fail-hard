@@ -22,28 +22,29 @@ struct CalendarView: View {
             return calendar.date(from: components)
         }
     }
-
+    
     var body: some View {
-        VStack {
-            Text("Fail Hard!")
-                .font(.largeTitle)
-                .padding()
-            
-            // Month and year display
-            Text(monthAndYearString(date: currentDate))
-                .font(.title2)
-                .padding()
-            
-            // Days of the week header
-            HStack {
-                ForEach(["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], id: \.self) { day in
-                    Text(day)
-                        .frame(maxWidth: .infinity)
+        NavigationView {
+            VStack {
+                Text("Fail Hard!")
+                    .font(.largeTitle)
+                    .padding()
+                
+                // Month and year display
+                Text(monthAndYearString(date: currentDate))
+                    .font(.title2)
+                    .padding()
+                
+                // Days of the week header
+                HStack {
+                    ForEach(["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], id: \.self) { day in
+                        Text(day)
+                            .frame(maxWidth: .infinity)
+                    }
                 }
-            }
-            
-            // Have a sound play and celebrate after every workout is complete
-            NavigationView {
+                
+                // Have a sound play and celebrate after every workout is complete
+                
                 // Days in the current month in a grid layout
                 LazyVGrid(columns:Array(repeating: GridItem(), count: 7), spacing: 10) {
                     ForEach(daysInMonth, id: \.self) { day in
@@ -56,8 +57,9 @@ struct CalendarView: View {
                         }
                     }
                 }
+                
+                Spacer()
             }
-            Spacer()
         }
         .padding()
     }
