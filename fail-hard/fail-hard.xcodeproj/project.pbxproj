@@ -11,6 +11,7 @@
 		C50FAA0F2CB9E35900857D71 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50FAA0E2CB9E35900857D71 /* CalendarView.swift */; };
 		C50FAA112CB9E35A00857D71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C50FAA102CB9E35A00857D71 /* Assets.xcassets */; };
 		C50FAA142CB9E35A00857D71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C50FAA132CB9E35A00857D71 /* Preview Assets.xcassets */; };
+		C50FAA1B2CBA022100857D71 /* WorkoutLoggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		C50FAA0E2CB9E35900857D71 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		C50FAA102CB9E35A00857D71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C50FAA132CB9E35A00857D71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				C50FAA0C2CB9E35900857D71 /* fail_hardApp.swift */,
 				C50FAA0E2CB9E35900857D71 /* CalendarView.swift */,
+				C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */,
 				C50FAA102CB9E35A00857D71 /* Assets.xcassets */,
 				C50FAA122CB9E35A00857D71 /* Preview Content */,
 			);
@@ -139,6 +142,7 @@
 			files = (
 				C50FAA0F2CB9E35900857D71 /* CalendarView.swift in Sources */,
 				C50FAA0D2CB9E35900857D71 /* fail_hardApp.swift in Sources */,
+				C50FAA1B2CBA022100857D71 /* WorkoutLoggingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
