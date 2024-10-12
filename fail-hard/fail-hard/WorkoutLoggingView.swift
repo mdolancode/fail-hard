@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct WorkoutLoggingView: View {
     let selectedDate: Date
     @State private var workoutName: String = ""
+    @State private var audioPlayer: AVAudioPlayer?
     
     var body: some View {
         VStack {
@@ -23,12 +25,30 @@ struct WorkoutLoggingView: View {
             
             Button("Save Workout") {
                 CoreDataManager.shared.saveWorkout(name: workoutName, date: selectedDate)
-                //Add logic to play sound here later!
+                playWoooSound()
                 print("Workout logged for \(selectedDate): \(workoutName)")
+                
+                if let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+                    print("Core Data SQLite file location: \(url)")
+                }
             }
             .padding()
         }
         .navigationTitle("Log Workout")
+    }
+    
+    func playWoooSound() {
+        guard let soundURL = Bundle.main.url(forResource: "wooo", withExtension: "wav") else {
+            print("Sound file not found")
+            return
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.play()
+        } catch {
+            print("Error playing sound: \(error.localizedDescription)")
+        }
     }
     
     func dayString(date: Date) -> String {
@@ -36,6 +56,8 @@ struct WorkoutLoggingView: View {
         formatter.dateStyle = .long
         return formatter.string(from: date)
     }
+    
+    
 }
 
 struct WorkoutLoggingView_Previews: PreviewProvider {
