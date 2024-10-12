@@ -12,6 +12,8 @@
 		C50FAA112CB9E35A00857D71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C50FAA102CB9E35A00857D71 /* Assets.xcassets */; };
 		C50FAA142CB9E35A00857D71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C50FAA132CB9E35A00857D71 /* Preview Assets.xcassets */; };
 		C50FAA1B2CBA022100857D71 /* WorkoutLoggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */; };
+		C54E17642CBB03AC00B53674 /* WorkoutModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C54E17622CBB03AC00B53674 /* WorkoutModel.xcdatamodeld */; };
+		C54E17662CBB042300B53674 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54E17652CBB042300B53674 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		C50FAA102CB9E35A00857D71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C50FAA132CB9E35A00857D71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLoggingView.swift; sourceTree = "<group>"; };
+		C54E17632CBB03AC00B53674 /* WorkoutModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutModel.xcdatamodel; sourceTree = "<group>"; };
+		C54E17652CBB042300B53674 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 				C50FAA0C2CB9E35900857D71 /* fail_hardApp.swift */,
 				C50FAA0E2CB9E35900857D71 /* CalendarView.swift */,
 				C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */,
+				C54E17622CBB03AC00B53674 /* WorkoutModel.xcdatamodeld */,
+				C54E17652CBB042300B53674 /* CoreDataManager.swift */,
 				C50FAA102CB9E35A00857D71 /* Assets.xcassets */,
 				C50FAA122CB9E35A00857D71 /* Preview Content */,
 			);
@@ -141,7 +147,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C50FAA0F2CB9E35900857D71 /* CalendarView.swift in Sources */,
+				C54E17642CBB03AC00B53674 /* WorkoutModel.xcdatamodeld in Sources */,
 				C50FAA0D2CB9E35900857D71 /* fail_hardApp.swift in Sources */,
+				C54E17662CBB042300B53674 /* CoreDataManager.swift in Sources */,
 				C50FAA1B2CBA022100857D71 /* WorkoutLoggingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +351,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C54E17622CBB03AC00B53674 /* WorkoutModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C54E17632CBB03AC00B53674 /* WorkoutModel.xcdatamodel */,
+			);
+			currentVersion = C54E17632CBB03AC00B53674 /* WorkoutModel.xcdatamodel */;
+			path = WorkoutModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C50FAA012CB9E35800857D71 /* Project object */;
 }
