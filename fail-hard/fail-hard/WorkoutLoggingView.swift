@@ -14,6 +14,9 @@ struct WorkoutLoggingView: View {
     @State private var volume: Float = 0.8 // Default volume
     @State private var audioPlayer: AVAudioPlayer?
     
+    // Add presentationMode to dismiss the view
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         VStack {
             Text("Log Workout for \(dayString(date:selectedDate))")
@@ -25,13 +28,7 @@ struct WorkoutLoggingView: View {
                 .padding()
             
             Button("Save Workout") {
-                CoreDataManager.shared.saveWorkout(name: workoutName, date: selectedDate)
-                playCelebrationSound()
-                print("Workout logged for \(selectedDate): \(workoutName)")
-                
-                if let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-                    print("Core Data SQLite file location: \(url)")
-                }
+                saveWorkoutAndDismiss()
             }
             .padding()
             
@@ -47,6 +44,24 @@ struct WorkoutLoggingView: View {
         }
         
         .navigationTitle("Log Workout")
+    }
+    
+    // Save workout and navigate back to the main screen
+    func saveWorkoutAndDismiss() {
+        CoreDataManager.shared.saveWorkout(name: workoutName, date: selectedDate)
+        playCelebrationSound()
+        print("Workout logged for \(selectedDate): \(workoutName)")
+        
+        // SQLite data path
+        if let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+            print("Core Data SQLite file location: \(url)")
+        }
+        
+        // Dismiss the view after a slight delay ( to allow the sound to play)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
+            presentationMode.wrappedValue.dismiss()
+        }
+        
     }
     
     // Prepare Audio Player with initial volume
