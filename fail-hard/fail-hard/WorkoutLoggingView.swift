@@ -11,6 +11,7 @@ import AVFoundation
 struct WorkoutLoggingView: View {
     let selectedDate: Date
     @State private var workoutName: String = ""
+    @State private var volume: Float = 0.8 // Default volume
     @State private var audioPlayer: AVAudioPlayer?
     
     var body: some View {
@@ -33,8 +34,34 @@ struct WorkoutLoggingView: View {
                 }
             }
             .padding()
+            
+            Slider(value: $volume, in: 0...1) // Slider for volume adjustment
+                .padding()
+                .onChange(of: volume) { newValue in
+                    audioPlayer?.volume = newValue
+                }
         }
+        
+        .onAppear {
+            prepareAudioPlayer()
+        }
+        
         .navigationTitle("Log Workout")
+    }
+    
+    // Prepare Audio Player with initial volume
+    func prepareAudioPlayer() {
+        guard let soundURL = Bundle.main.url(forResource: "celebration", withExtension: "wav") else {
+            print("Sound file not found")
+            return
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.volume = volume // Sets initial volume
+        } catch {
+            print("Error initializing audio player: \(error.localizedDescription)")
+        }
     }
     
     func playCelebrationSound() {
