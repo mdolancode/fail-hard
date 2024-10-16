@@ -11,21 +11,34 @@ import CoreData
 struct EditWorkoutView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var workout: Workout // Your Core Data workout entity
+    @State private var isinputValid: Bool = true // Track input validity
     
     var body: some View {
         Form {
             TextField("Workout Name", text: Binding(
                 get: { workout.name ?? "" }, // Use an empty string if the name is nil
-                set: { workout.name = $0.isEmpty ? nil : $0 } // Set to nil if the user clears the text
+                set: { newValue in
+                    workout.name = newValue.isEmpty ? nil : newValue
+                    isinputValid = !newValue.trimmingCharacters(in: .whitespaces).isEmpty // Validate input
+                    
+                } // Set to nil if the user clears the text
                 ))
             // Add more fields as necessary, e.g., duration, type of workout
+            
+            if !isinputValid {
+                Text("workout name cannot be empty.")
+                    .foregroundColor(.red)
+            }
             
             
             Button("Save") {
                 // Save the edited workout details to Core Data
-                saveWorkout()
-                dismiss()
+                if isinputValid {
+                    saveWorkout()
+                    dismiss()
+                }
             }
+            .disabled(!isinputValid)
         }
         .navigationTitle("Edit Workout")
     }
