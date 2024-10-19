@@ -16,6 +16,7 @@
 		C54E17662CBB042300B53674 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54E17652CBB042300B53674 /* CoreDataManager.swift */; };
 		C54E17692CBB1A1A00B53674 /* fallback.wav in Resources */ = {isa = PBXBuildFile; fileRef = C54E17682CBB1A1A00B53674 /* fallback.wav */; };
 		C54E176D2CBB250A00B53674 /* celebration.wav in Resources */ = {isa = PBXBuildFile; fileRef = C54E176C2CBB250A00B53674 /* celebration.wav */; };
+		C586E9412CC07018004C7500 /* WorkoutListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C586E9402CC07018004C7500 /* WorkoutListView.swift */; };
 		C5D890372CBDC09900F04D16 /* EditWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D890362CBDC09900F04D16 /* EditWorkoutView.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		C54E17652CBB042300B53674 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C54E17682CBB1A1A00B53674 /* fallback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fallback.wav; sourceTree = "<group>"; };
 		C54E176C2CBB250A00B53674 /* celebration.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = celebration.wav; sourceTree = "<group>"; };
+		C586E9402CC07018004C7500 /* WorkoutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListView.swift; sourceTree = "<group>"; };
 		C5D890362CBDC09900F04D16 /* EditWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWorkoutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +68,7 @@
 				C50FAA0C2CB9E35900857D71 /* fail_hardApp.swift */,
 				C50FAA0E2CB9E35900857D71 /* CalendarView.swift */,
 				C50FAA1A2CBA022100857D71 /* WorkoutLoggingView.swift */,
+				C586E9402CC07018004C7500 /* WorkoutListView.swift */,
 				C5D890362CBDC09900F04D16 /* EditWorkoutView.swift */,
 				C54E17652CBB042300B53674 /* CoreDataManager.swift */,
 				C54E17622CBB03AC00B53674 /* WorkoutModel.xcdatamodeld */,
@@ -168,6 +171,7 @@
 				C50FAA0F2CB9E35900857D71 /* CalendarView.swift in Sources */,
 				C54E17642CBB03AC00B53674 /* WorkoutModel.xcdatamodeld in Sources */,
 				C5D890372CBDC09900F04D16 /* EditWorkoutView.swift in Sources */,
+				C586E9412CC07018004C7500 /* WorkoutListView.swift in Sources */,
 				C50FAA0D2CB9E35900857D71 /* fail_hardApp.swift in Sources */,
 				C54E17662CBB042300B53674 /* CoreDataManager.swift in Sources */,
 				C50FAA1B2CBA022100857D71 /* WorkoutLoggingView.swift in Sources */,
