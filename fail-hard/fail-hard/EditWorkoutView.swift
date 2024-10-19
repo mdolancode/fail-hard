@@ -10,7 +10,7 @@ import CoreData
 
 struct EditWorkoutView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var workout: Workout // Your Core Data workout entity
+    @ObservedObject var workout: Workout // Use ObservedObject to observe changes in the workout
     @State private var isinputValid: Bool = true // Track input validity
     
     var body: some View {
@@ -69,9 +69,6 @@ struct EditWorkoutView_Previews: PreviewProvider {
         let workout = Workout.example()
         
         // Wrap the workout in a Binding
-        EditWorkoutView(workout: Binding<Workout>(
-        get: { workout },
-        set: { _ in }
-        ))
+        EditWorkoutView(workout: workout)
     }
 }
