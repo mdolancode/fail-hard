@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct fail_hardApp: App {
+    let persistenceController = CoreDataManager.shared
     var body: some Scene {
         WindowGroup {
             CalendarView()
+                .environment(\.managedObjectContext, persistenceController.persistentContainer.viewContext)
         }
     }
 }
