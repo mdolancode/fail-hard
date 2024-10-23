@@ -12,6 +12,12 @@ struct CalendarView: View {
     @State private var currentDate = Date()
     @State private var selectedDate: Date?
     
+    // Fetch workouts from Core Data
+    @FetchRequest(
+        entity: Workout.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Workout.date, ascending: true)]
+    ) private var workouts: FetchedResults<Workout>
+    
     // Date-related helpers
     private var daysInMonth: [Date] {
         let calendar = Calendar.current
@@ -43,15 +49,14 @@ struct CalendarView: View {
                     }
                 }
                 
-                // Have a sound play and celebrate after every workout is complete
-                
                 // Days in the current month in a grid layout
                 LazyVGrid(columns:Array(repeating: GridItem(), count: 7), spacing: 10) {
                     ForEach(daysInMonth, id: \.self) { day in
                         NavigationLink(destination: WorkoutLoggingView(selectedDate: day)) {
                             Text(dayString(date: day))
                                 .frame(width: 40, height: 40)
-                                .backgroundStyle(isSameDay(date1: selectedDate, date2: day) ? Color.blue : Color.clear)
+//                                .backgroundStyle(isSameDay(date1: selectedDate, date2: day) ? Color.blue : Color.clear)
+                                .background(isSameDay(date1: selectedDate, date2: day) ? Color.blue : workoutForDate(day) != nil ? Color.green : Color.clear) // Green for days with a workout
                                 .foregroundColor(isSameDay(date1: selectedDate, date2: day) ? .white : .black)
                                 .clipShape(Circle())
                         }
@@ -83,6 +88,15 @@ struct CalendarView: View {
         guard let date1 = date1 else { return false }
         let calendar = Calendar.current
         return calendar.isDate(date1, inSameDayAs: date2)
+    }
+    
+    // Helper to find if there's a workout for a specific date
+    private func workoutForDate(_ date: Date) -> Workout? {
+        let calendar = Calendar.current
+        return workouts.first(where: {
+            guard let workoutDate = $0.date else { return false }
+            return calendar.isDate(workoutDate, inSameDayAs: date)
+        })
     }
 }
 
