@@ -52,10 +52,13 @@ struct CalendarView: View {
                 // Days in the current month in a grid layout
                 LazyVGrid(columns:Array(repeating: GridItem(), count: 7), spacing: 10) {
                     ForEach(daysInMonth, id: \.self) { day in
-                        NavigationLink(destination: WorkoutLoggingView(selectedDate: day)) {
+//                        NavigationLink(destination: WorkoutLoggingView(selectedDate: day)) {
+                        Button(action: {
+                            selectedDate = day
+                            
+                        }) {
                             Text(dayString(date: day))
                                 .frame(width: 40, height: 40)
-//                                .backgroundStyle(isSameDay(date1: selectedDate, date2: day) ? Color.blue : Color.clear)
                                 .background(isSameDay(date1: selectedDate, date2: day) ? Color.blue : workoutForDate(day) != nil ? Color.green : Color.clear) // Green for days with a workout
                                 .foregroundColor(isSameDay(date1: selectedDate, date2: day) ? .white : .black)
                                 .clipShape(Circle())
@@ -64,9 +67,20 @@ struct CalendarView: View {
                 }
                 
                 Spacer()
+                // Embed WorkoutListView for the selected date
+                if let selectedDate = selectedDate {
+                    WorkoutListView(selectedDate: selectedDate)
+                        .padding(.top)
+                }
             }
+            navigationTitle("Workout Logger")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                }
         }
-        .padding()
+//        .padding()
     }
     
     // Helper to format the date for the grid (day number)
