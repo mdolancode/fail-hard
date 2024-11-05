@@ -32,15 +32,12 @@ struct CalendarView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Fail Hard!")
-                    .font(.largeTitle)
-                    .padding()
-                
-                // Month and year display
-                Text(monthAndYearString(date: currentDate))
-                    .font(.title2)
-                    .padding()
-                
+                // HeaderView with navigation buttons
+                HeaderView(
+                    currentDate: currentDate,
+                    onPreviousMonth: goToPreviousMonth,
+                    onNextMonth: goToNextMonth
+                )
                 // Days of the week header
                 HStack {
                     ForEach(["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], id: \.self) { day in
@@ -49,68 +46,48 @@ struct CalendarView: View {
                     }
                 }
                 
-                // Days in the current month in a grid layout
-                LazyVGrid(columns:Array(repeating: GridItem(), count: 7), spacing: 10) {
-                    ForEach(daysInMonth, id: \.self) { day in
-//                        NavigationLink(destination: WorkoutLoggingView(selectedDate: day)) {
-                        Button(action: {
-                            selectedDate = day
-                            
-                        }) {
-                            Text(dayString(date: day))
-                                .frame(width: 40, height: 40)
-                                .background(isSameDay(date1: selectedDate, date2: day) ? Color.blue : workoutForDate(day) != nil ? Color.green : Color.clear) // Green for days with a workout
-                                .foregroundColor(isSameDay(date1: selectedDate, date2: day) ? .white : .black)
-                                .clipShape(Circle())
-                        }
-                    }
-                }
+                CalendarGridView(
+                    daysInMonth: daysInMonth,
+                    selectedDate: $selectedDate,
+                    workouts: workouts
+                )
                 
                 Spacer()
+                
                 // Embed WorkoutListView for the selected date
                 if let selectedDate = selectedDate {
                     WorkoutListView(selectedDate: selectedDate)
                         .padding(.top)
+                } else {
+                    Text("Select a date to see workouts.")
+                        .foregroundColor(.gray)
                 }
             }
-            navigationTitle("Workout Logger")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
+            .navigationTitle("Workout Logger")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
                 }
+            }
+            .padding()
         }
-//        .padding()
     }
-    
-    // Helper to format the date for the grid (day number)
-    private func dayString(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d"
-        return formatter.string(from: date)
-    }
-    
-    // Helper to format the month and year
-    private func monthAndYearString(date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM yyyy"
-        return formatter.string(from: date)
-    }
-    
-    // Helper to check if two dates are the same day
-    private func isSameDay(date1: Date?, date2: Date) -> Bool {
-        guard let date1 = date1 else { return false }
+    private var daysInMonths: [Date] {
         let calendar = Calendar.current
-        return calendar.isDate(date1, inSameDayAs: date2)
+        guard let range = calendar.range(of: .day, in: .month, for: currentDate) else { return [] }
+        return range.compactMap { day -> Date? in
+            var components = calendar.dateComponents([.year, .month], from: currentDate)
+            components.day = day
+            return calendar.date(from: components)
+        }
     }
     
-    // Helper to find if there's a workout for a specific date
-    private func workoutForDate(_ date: Date) -> Workout? {
-        let calendar = Calendar.current
-        return workouts.first(where: {
-            guard let workoutDate = $0.date else { return false }
-            return calendar.isDate(workoutDate, inSameDayAs: date)
-        })
+    // Update currentDate to the previous month
+    private func goToPreviousMonth() {
+        currentDate = Calendar.current.date(byAdding: .month, value: -1, to: currentDate) ?? currentDate
+    }
+    private func goToNextMonth() {
+        currentDate = Calendar.current.date(byAdding: .month, value: 1, to: currentDate) ?? currentDate
     }
 }
 
