@@ -30,7 +30,6 @@ struct EditWorkoutView: View {
                     .foregroundColor(.red)
             }
             
-            
             Button("Save") {
                 // Save the edited workout details to Core Data
                 if isinputValid {
@@ -41,6 +40,7 @@ struct EditWorkoutView: View {
             .disabled(!isinputValid)
         }
         .navigationTitle("Edit Workout")
+        
     }
     
     private func saveWorkout() {
