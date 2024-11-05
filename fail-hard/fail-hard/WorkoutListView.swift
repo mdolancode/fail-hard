@@ -27,12 +27,6 @@ struct WorkoutListView: View {
                 }
                 .onDelete(perform: deleteWorkouts)
             }
-            .navigationTitle("Workouts") // Optional, in case it gets used independently
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-            }
     }
     
     private var filteredWorkouts: [Workout] {
