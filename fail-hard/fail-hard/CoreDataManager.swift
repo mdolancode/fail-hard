@@ -35,6 +35,27 @@ class CoreDataManager {
         }
     }
     
+    func updateWorkout(workout: Workout, newName: String) {
+        workout.name = newName
+        saveContext()
+    }
+    
+    func deleteWorkout(workout: Workout) {
+        let context = persistentContainer.viewContext
+        context.delete(workout)
+        saveContext()
+    }
+    
+    private func saveContext() {
+        let context = persistentContainer.viewContext
+        do {
+            try context.save()
+            print("Changes saved successfully!")
+        } catch {
+            print("Failed to save context: \(error.localizedDescription)")
+        }
+    }
+    
     func FetchWorkouts() -> [Workout] {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
