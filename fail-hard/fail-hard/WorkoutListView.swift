@@ -27,18 +27,21 @@ struct WorkoutListView: View {
             List {
                 ForEach(filteredWorkouts, id: \.self) { workout in
                     NavigationLink(destination: EditWorkoutView(workout: workout)) {
-                        Text(workout.name ?? "Unnamed Workout")
+                        WorkoutRow(workout: workout)
                     }
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                    .listRowInsets(EdgeInsets()) // Remove default padding
                 }
                 .onDelete(perform: deleteWorkouts)
             }
             .listStyle(PlainListStyle()) // Keep the list simple and minimal
+            .padding()
+            .background(Color(.systemGray6)) // Background to give a card-like feel
+            .cornerRadius(12)
+            .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 4)
+            .padding(.horizontal, 16)
         }
-        .padding()
-        .background(Color(.systemGray6)) // Background to give a card-like feel
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 4)
-        .padding(.horizontal, 16)
     }
     
     private var filteredWorkouts: [Workout] {
@@ -68,6 +71,25 @@ struct WorkoutListView: View {
         formatter.dateStyle = .long
         return formatter.string(from: date)
     }
+}
+
+struct WorkoutRow: View {
+    let workout: Workout
+    
+    var body: some View {
+        HStack {
+            Text(workout.name ?? "Unnamed Workout")
+                .font(.body)
+                .foregroundColor(.primary)
+                .padding(.vertical, 10)
+                .padding(.horizontal, 12)
+            Spacer()
+        }
+        .background(Color.white)
+        .cornerRadius(8) // Rounded for each list item
+        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+    }
+
 }
 
 struct WorkoutListView_Previews: PreviewProvider {
