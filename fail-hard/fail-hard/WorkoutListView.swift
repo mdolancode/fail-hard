@@ -19,6 +19,11 @@ struct WorkoutListView: View {
     let selectedDate: Date // Passed from CalendarView
     
     var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Workouts on \(formattedDate(selectedDate))")
+                .font(.headline)
+                .padding([.top, .leading], 16)
+            
             List {
                 ForEach(filteredWorkouts, id: \.self) { workout in
                     NavigationLink(destination: EditWorkoutView(workout: workout)) {
@@ -27,6 +32,13 @@ struct WorkoutListView: View {
                 }
                 .onDelete(perform: deleteWorkouts)
             }
+            .listStyle(PlainListStyle()) // Keep the list simple and minimal
+        }
+        .padding()
+        .background(Color(.systemGray6)) // Background to give a card-like feel
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 4)
+        .padding(.horizontal, 16)
     }
     
     private var filteredWorkouts: [Workout] {
@@ -49,6 +61,12 @@ struct WorkoutListView: View {
             }
         }
         
+    }
+    
+    private func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter.string(from: date)
     }
 }
 
