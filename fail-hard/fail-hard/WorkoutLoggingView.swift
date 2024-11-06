@@ -48,14 +48,19 @@ struct WorkoutLoggingView: View {
     
     // Save workout and navigate back to the main screen
     func saveWorkoutAndDismiss() {
+        guard !workoutName.trimmingCharacters(in: .whitespaces).isEmpty else {
+            print("Workout name cannot be empty")
+            return
+        }
+        
         CoreDataManager.shared.saveWorkout(name: workoutName, date: selectedDate)
         playCelebrationSound()
         print("Workout logged for \(selectedDate): \(workoutName)")
         
         // SQLite data path
-        if let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-            print("Core Data SQLite file location: \(url)")
-        }
+//        if let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+//            print("Core Data SQLite file location: \(url)")
+//        }
         
         // Dismiss the view after a slight delay ( to allow the sound to play)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
