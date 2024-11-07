@@ -28,7 +28,7 @@ struct EditWorkoutView: View {
             // Add more fields as necessary, e.g., duration, type of workout
             
             if !isinputValid {
-                Text("workout name cannot be empty.")
+                Text("Workout name cannot be empty.")
                     .foregroundColor(.red)
             }
             
