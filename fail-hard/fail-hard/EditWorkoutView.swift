@@ -13,7 +13,7 @@ struct EditWorkoutView: View {
     @ObservedObject var workout: Workout // Use ObservedObject to observe changes in the workout
     @State private var isinputValid: Bool = true // Track input validity
     @State private var showAlert: Bool = false
-    @State private var alertMessage = ""
+    @State private var alertMessage: String = ""
     
     var body: some View {
         Form {
