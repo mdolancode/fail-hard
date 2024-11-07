@@ -12,7 +12,7 @@ struct EditWorkoutView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var workout: Workout // Use ObservedObject to observe changes in the workout
     @State private var isinputValid: Bool = true // Track input validity
-    @State private var showAlert = false
+    @State private var showAlert: Bool = false
     @State private var alertMessage = ""
     
     var body: some View {
