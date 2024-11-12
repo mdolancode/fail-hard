@@ -13,9 +13,11 @@ struct WorkoutLoggingView: View {
     @State private var workoutName: String = ""
     @State private var volume: Float = 0.8 // Default volume
     @State private var audioPlayer: AVAudioPlayer?
-    
     // Add presentationMode to dismiss the view
     @Environment(\.presentationMode) var presentationMode
+    @State private var showAlert: Bool = false
+    @State private var alertMessage: String = ""
+    
     
     var body: some View {
         VStack {
@@ -28,7 +30,14 @@ struct WorkoutLoggingView: View {
                 .padding()
             
             Button("Save Workout") {
+                guard !workoutName.trimmingCharacters(in: .whitespaces).isEmpty else {
+                    alertMessage = "Workout name cannot be empty."
+                    showAlert = true
+                    return
+                }
                 saveWorkoutAndDismiss()
+                alertMessage = "Workout legged successfully!"
+                showAlert = true
             }
             .padding()
             
@@ -38,11 +47,16 @@ struct WorkoutLoggingView: View {
                     audioPlayer?.volume = newValue
                 }
         }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         
         .onAppear {
             prepareAudioPlayer()
         }
-        
         .navigationTitle("Log Workout")
     }
     
