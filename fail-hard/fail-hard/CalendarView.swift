@@ -5,29 +5,21 @@
 //  Created by Matthew Dolan on 2024-10-11.
 //
 
+// Fail Hard! How to transform your life.
+
 import SwiftUI
 
 struct CalendarView: View {
     // Track the current date and selected date
     @State private var currentDate = Date()
     @State private var selectedDate: Date?
+    @State private var showWorkoutListModal = false
     
     // Fetch workouts from Core Data
     @FetchRequest(
         entity: Workout.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Workout.date, ascending: true)]
     ) private var workouts: FetchedResults<Workout>
-    
-    // Date-related helpers
-    private var daysInMonth: [Date] {
-        let calendar = Calendar.current
-        guard let range = calendar.range(of: .day, in: .month, for: currentDate) else { return [] }
-        return range.compactMap { day -> Date? in
-            var components = calendar.dateComponents([.year, .month], from: currentDate)
-            components.day = day
-            return calendar.date(from: components)
-        }
-    }
     
     var body: some View {
         NavigationView {
@@ -49,30 +41,29 @@ struct CalendarView: View {
                 CalendarGridView(
                     daysInMonth: daysInMonth,
                     selectedDate: $selectedDate,
-                    workouts: workouts
+                    workouts: workouts,
+                    onSelectDate: { date in
+                        if hasWorkouts(for: date) {
+                            selectedDate = date
+                            showWorkoutListModal = true
+                        }
+                    }
                 )
                 
                 Spacer()
-                
-                // Embed WorkoutListView for the selected date
-                if let selectedDate = selectedDate {
-                    WorkoutListView(selectedDate: selectedDate)
-                        .padding(.top)
-                } else {
-                    Text("Select a date to see workouts.")
-                        .foregroundColor(.gray)
-                }
             }
             .navigationTitle("Workout Logger")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+            .sheet(isPresented: $showWorkoutListModal) {
+                if let selectedDate = selectedDate {
+                    WorkoutListView(selectedDate: selectedDate)
                 }
             }
             .padding()
         }
     }
-    private var daysInMonths: [Date] {
+    
+    // Date-related helpers
+    private var daysInMonth: [Date] {
         let calendar = Calendar.current
         guard let range = calendar.range(of: .day, in: .month, for: currentDate) else { return [] }
         return range.compactMap { day -> Date? in
@@ -88,6 +79,20 @@ struct CalendarView: View {
     }
     private func goToNextMonth() {
         currentDate = Calendar.current.date(byAdding: .month, value: 1, to: currentDate) ?? currentDate
+    }
+    
+    private func hasWorkouts(for date: Date) -> Bool {
+        let calendar = Calendar.current
+        return workouts.contains { workout in
+            guard let workoutDate = workout.date else { return false }
+            return calendar.isDate(workoutDate, inSameDayAs: date)
+        }
+    }
+    
+    private func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter.string(from: date)
     }
 }
 
