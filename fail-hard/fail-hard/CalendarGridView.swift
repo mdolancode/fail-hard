@@ -11,26 +11,24 @@ struct CalendarGridView: View {
     let daysInMonth: [Date]
     @Binding var selectedDate: Date?
     let workouts: FetchedResults<Workout>
+    let onSelectDate: (Date) -> Void
     
     var body: some View {
         // Days in the current month in a grid layout
         LazyVGrid(columns:Array(repeating: GridItem(), count: 7), spacing: 10) {
             ForEach(daysInMonth, id: \.self) { day in
-                Button(action: {
-                    selectedDate = day
-                    print("Button tapped: \(day)")
-                }) {
-                    Text(dayString(date: day))
-                        .frame(width: 40, height: 40)
-                        .background(isSameDay(date1: selectedDate, date2: day) ? Color.blue : workoutForDate(day) != nil ? Color.green : Color.clear) // Green for days with a workout
-                        .foregroundColor(isSameDay(date1: selectedDate, date2: day) ? .white : .black)
-                        .clipShape(Circle())
-                }
-                .contentShape(Circle())
-                .background(Color.clear)
+                Text(dayString(date: day))
+                    .frame(width: 40, height: 40)
+                    .background(isSameDay(date1: selectedDate, date2: day) ? Color.blue : workoutForDate(day) != nil ? Color.green : Color.clear) // Green for days with a workout
+                    .foregroundColor(isSameDay(date1: selectedDate, date2: day) ? .white : .black)
+                    .clipShape(Circle())
+                    .onTapGesture {
+                        onSelectDate(day)
+                    }
             }
         }
     }
+    
     
     // Helper to format the date for the grid (day number)
     private func dayString(date: Date) -> String {
@@ -38,7 +36,7 @@ struct CalendarGridView: View {
         formatter.dateFormat = "d"
         return formatter.string(from: date)
     }
-
+    
     
     // Helper to check if two dates are the same day
     private func isSameDay(date1: Date?, date2: Date) -> Bool {
@@ -57,8 +55,4 @@ struct CalendarGridView: View {
     }
 }
 
-//struct CalendarGridView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CalendarGridView()
-//    }
-//}
+
